@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leaflet Route Example</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+      #map {
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+        <h2>My coords:</h2>
+        <p id="demo"></p>
+    </div>
+    <div id="map"></div>
+
+    <script>
+      // Initialize the map
+      var map = L.map("map").setView([51.505, -0.09], 13); // Centered on London
+
+      // Add a tile layer (OpenStreetMap)
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
+      var routeCoords = []
+
+      geometry = [
+                {
+                    "lat": 59.3587156,
+                    "lon": 17.9856514
+                },
+                {
+                    "lat": 59.3586533,
+                    "lon": 17.9854336
+                },
+                {
+                    "lat": 59.3586464,
+                    "lon": 17.9854097
+                },
+                {
+                    "lat": 59.3584529,
+                    "lon": 17.9848596
+                },
+                {
+                    "lat": 59.3583802,
+                    "lon": 17.9846165
+                },
+                {
+                    "lat": 59.3583540,
+                    "lon": 17.9844540
+                },
+                {
+                    "lat": 59.3583420,
+                    "lon": 17.9840714
+                },
+                {
+                    "lat": 59.3583884,
+                    "lon": 17.9837860
+                },
+                {
+                    "lat": 59.3584568,
+                    "lon": 17.9836036
+                },
+                {
+                    "lat": 59.3585402,
+                    "lon": 17.9834051
+                },
+                {
+                    "lat": 59.3586126,
+                    "lon": 17.9831906
+                },
+                {
+                    "lat": 59.3586525,
+                    "lon": 17.9830168
+                }
+            ]
+
+                for( pos in geometry) {
+                    routeCoords.push([geometry[pos].lat, geometry[pos].lon])
+                }
+
+      
+      var routeCoords3 = [
+                [
+                    40.7689031,
+                    -73.9799488
+                ],
+                [
+                     40.7688871,
+                     -73.9800500
+                ],
+                [
+                     40.7688413,
+                     -73.9801367
+                ],
+                [
+                     40.7687232,
+                     -73.9803278
+                ],
+                [
+                     40.7686600,
+                     -73.9804970
+                ],
+                [
+                     40.7685773,
+                     -73.9807006
+                ],
+                [
+                     40.7683935,
+                     -73.9810754
+                ],
+                [
+                     40.7683147,
+                     -73.9812384
+                ],
+                [
+                     40.7283121,
+                     -72.9112111
+                ],
+            ]
+
+      // Define route coordinates (lat, lng)
+      var routeCoords2 = [
+        [51.505, -0.09],
+        [51.51, -0.1],
+        [51.52, -0.12],
+      ];
+
+      // Add the polyline (route)
+      var route = L.polyline(routeCoords, { color: "blue", weight: 5 }).addTo(
+        map
+      );
+
+      // Fit map to route
+      map.fitBounds(route.getBounds());
+
+const x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function success(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
+
+function error() {
+  alert("Sorry, no position available.");
+}
+
+getLocation()
+    </script>
+  </body>
+</html>
